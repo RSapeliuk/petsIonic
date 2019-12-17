@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar class="">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref=""></ion-back-button>
+      </ion-buttons>
+        <ion-title class="text-align">
+          Вхід
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form #form="ngForm" (ngSubmit)="login()">
+        <ion-item>
+            <ion-label position="stacked"> Username
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" name="log" [(ngModel)]="user.username"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked"> Password
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="password" name="pass" [(ngModel)]="user.password"></ion-input>
+        </ion-item>
+
+        <div class="ion-padding">
+            <ion-button [disabled]="form.invalid" expand="block" type="submit" class="ion-no-margin">Увійти</ion-button>
+        </div>
+    </form>
+</ion-content>

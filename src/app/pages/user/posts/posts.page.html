@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Мої пости</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="this.userPosts" class="cards">
+    <div *ngFor="let post of this.userPosts">
+      <ion-card class="mat-card" *ngIf="post.enabled">
+
+        <div *ngIf="post.kind === 'Залишити'">
+          <div *ngIf="post.photo; else blankPhoto">
+            <ion-img class="postImage" [src]="'http://localhost:8080/images/'+ post.photo"></ion-img>
+          </div>
+          <ng-template #blankPhoto>
+            <ion-img  class="postImage"
+                 src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/2-interior-wall-with-blank-picture-frame-jon-boyes.jpg"
+                      alt=""></ion-img></ng-template>
+        </div>
+        <div *ngIf="post.pet && post.kind === 'Віддати'">
+          <ion-img class="postImage" [src]="'http://localhost:8080/images/'+ post.pet.photo"></ion-img>
+        </div>
+        <ion-card-header>
+          <ion-card-subtitle>{{post.user.name}} {{post.user.surname}}</ion-card-subtitle>
+          <ion-card-title>{{post.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="text">{{post.optionalField}}
+          <div *ngIf="post.date && post.expirationDate">
+            {{post.date}} - {{post.expirationDate}}
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

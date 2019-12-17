@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Моя сторінка</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="this.user">
+
+    <div *ngIf="user.avatar != null; else photo"><ion-img src="http://localhost:8080/images/{{this.user.avatar}}"
+                                                          class="avatar" alt="userPhoto"></ion-img></div>
+    <ng-template #photo><ion-img src="http://storage.proboards.com/6747819/images/kIDnzzBGZLVoizBNhvQs.png" alt=""></ion-img>
+    </ng-template>
+    <div *ngIf="editable === false">
+      <h3> {{this.user.name}} {{this.user.surname}} </h3>
+      <h3>Email: {{this.user.email}}</h3>
+      <h3>Телефон: {{this.user.phoneNumber}}</h3>
+    </div>
+    <section ngSwitch="(editIndex == $index)">
+<!--      <star-rating [starType]="'svg'"-->
+<!--                   labelText="{{this.user.rating.toString() | slice: 0 : 3}} "-->
+<!--                   [rating]="this.user.rating"-->
+<!--                   [step]=".5"-->
+<!--                   [showHalfStars]="true"-->
+<!--                   [readOnly]="true">-->
+<!--      </star-rating>-->
+      <!-- Edit Fields -->
+      <h3 *ngIf="editable === true">
+        <ion-input [(ngModel)]="this.user.name" placeholder="Ім'я" type="text"></ion-input>
+        <ion-input [(ngModel)]="this.user.surname" placeholder="Прізвище" type="text"></ion-input>
+        <ion-input [(ngModel)]="this.user.email" placeholder="Е-Пошта" type="email"></ion-input>
+        <ion-input [(ngModel)]="this.user.phoneNumber" placeholder="Телефон" type="text"></ion-input>
+        <ion-input type="file" [(ngModel)]="this.user.avatar" placeholder="Фото"></ion-input>
+      </h3>
+      <div>
+
+        <!-- Default Buttons -->
+        <ion-button *ngIf="editable === false" (click)="editUser()">Редагувати</ion-button>
+
+        <!--Buttons for editing -->
+        <div *ngIf="editable === true">
+          <ion-button (click)="updateUser()">Зберегти</ion-button>
+          <ion-button (click)="cancelEdit()">X</ion-button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</ion-content>

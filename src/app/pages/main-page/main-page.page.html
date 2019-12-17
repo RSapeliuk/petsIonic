@@ -1,0 +1,40 @@
+<app-menu></app-menu>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Клуб власників тварин</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let post of posts">
+      <div *ngIf="post.kind === 'Залишити'">
+        <div *ngIf="post.photo; else blankPhoto">
+          <ion-img [src]="'http://localhost:8080/images/'+ post.photo"></ion-img>
+        </div>
+        <ng-template #blankPhoto>
+          <ion-img
+               src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/2-interior-wall-with-blank-picture-frame-jon-boyes.jpg"
+               alt=""></ion-img></ng-template>
+      </div>
+      <div *ngIf="post.pet && post.kind === 'Віддати'">
+        <ion-img class="postImage" [src]="'http://localhost:8080/images/'+ post.pet.photo"></ion-img>
+      </div>
+    <ion-card-header>
+      <ion-card-subtitle>{{post.user.name}} {{post.user.surname}}</ion-card-subtitle>
+      <ion-card-title>{{post.title}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{post.optionalField}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+

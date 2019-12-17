@@ -1,0 +1,32 @@
+<ion-menu side="start" menuId="first" content="content">
+    <ion-header>
+        <ion-toolbar color="primary">
+            <div *ngIf="user">
+                <ion-avatar>
+                    <img [src]="'http://localhost:8080/images/'+ user.avatar">
+                </ion-avatar>
+                <ion-title>{{user.name}} {{user.surname}}</ion-title>
+            </div>
+            <div *ngIf="!user">
+                <ion-title>
+                    Меню
+                </ion-title>
+            </div>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content id="content">
+        <ion-list>
+            <div *ngIf="!user">
+                <ion-item routerLink="login">Увійти</ion-item>
+                <ion-item routerLink="registration">Зареєструватись</ion-item>
+            </div>
+            <div *ngIf="user">
+                <ion-item routerLink="user">Профіль</ion-item>
+                <ion-item routerLink="post">Додати пост</ion-item>
+                <ion-item (click)="logout()">Вийти</ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+<ion-router-outlet main></ion-router-outlet>
+

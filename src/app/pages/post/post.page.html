@@ -1,0 +1,95 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref=""></ion-back-button>
+        </ion-buttons>
+        <ion-title>Додати пост</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-label>Тип посту</ion-label>
+        <ion-select [(ngModel)]="post.kind" name="kind">
+            <ion-select-option *ngFor="let k of kind" [value]="k.valueOf()">
+                {{k.valueOf()}}
+            </ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>Місто</ion-label>
+        <ion-select [(ngModel)]="postCity" name="city">
+            <ion-select-option *ngFor="let city of this.cities" value="{{city.name}}">{{city.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item *ngIf="postCity && postCity === 'ЛЬВІВ'">
+        <ion-label>Район</ion-label>
+        <ion-select [(ngModel)]="post.postDistrict" name="postDistrict">
+            <ion-select-option *ngFor="let dL of districtLviv" [value]="dL">
+                {{dL.name}}
+            </ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item *ngIf="postCity && postCity === 'КИЇВ'">
+        <ion-label>Район</ion-label>
+        <ion-select [(ngModel)]="post.postDistrict" name="postDistrict">
+            <ion-select-option *ngFor="let dK of districtKyiv" [value]="dK">
+                {{dK.name}}
+            </ion-select-option>
+        </ion-select>
+    </ion-item>
+    <form #postForm="ngForm" class="view" *ngIf="post.kind === 'Віддати'" (ngSubmit)="savePostWithPet(postForm)">
+        <div *ngIf="post.kind === 'Залишити'"></div>
+
+        <ion-item>
+            <ion-input placeholder="Назва" [(ngModel)]="post.title" name="title"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Тваринка</ion-label>
+            <ion-select [(ngModel)]="post.pet" name="pet">
+                <div *ngFor="let p of this.posts">
+                    <div *ngFor="let pet of this.pets">
+                        <ion-select-option [value]="pet">
+                            {{pet.name}}
+                        </ion-select-option>
+                    </div>
+                </div>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Від</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" min="1994-03-14" [(ngModel)]="post.date" name="date"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">До</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" min="1994-03-14" [(ngModel)]="post.expirationDate" name="expirationDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-textarea placeholder="Додаткова інформація" [(ngModel)]="post.optionalField" name="optional_field">
+            </ion-textarea>
+        </ion-item>
+        <br>
+        <ion-button type="submit ">Додати</ion-button>
+    </form>
+    <form #postForm="ngForm" class="view" *ngIf="post.kind === 'Залишити'" (ngSubmit)="savePost(postForm)">
+        <ion-item>
+            <ion-input placeholder="Назва" [(ngModel)]="post.title" name="title"></ion-input>
+        </ion-item>
+        <ion-item class="textAreaFullWidth">
+            <ion-textarea placeholder="Додаткова інформація" [(ngModel)]="post.optionalField" name="optional_field">
+            </ion-textarea>
+        </ion-item>
+        <div *ngIf="post.kind === 'Залишити'">
+            <ion-item>
+                <ion-input type="text" placeholder="Ціна за добу" [(ngModel)]="post.price" name="price"></ion-input>
+            </ion-item>
+            <div class="preview">
+                <ion-input type="file" (change)="onFileUpload($event)"></ion-input>
+                <ion-img [src]="imagePreview " alt=" " *ngIf="imagePreview "></ion-img>
+            </div>
+        </div>
+        <br>
+        <ion-button class="mat-button " type="submit">Додати</ion-button>
+    </form>
+</ion-content>

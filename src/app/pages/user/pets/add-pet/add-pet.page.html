@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Додати тваринку</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form #petForm="ngForm" (ngSubmit)="savePet()">
+        <ion-item>
+            <ion-label position="stacked">Тип тварини</ion-label>
+            <ion-select [(ngModel)]="pet.type" name="type">
+                <ion-select-option *ngFor="let t of type" value="{{t}}">
+                    <div>{{t}}</div>
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">Кличка</ion-label>
+            <ion-input type="text"
+                       [(ngModel)]="pet.name"
+                       required
+                       name="name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">Вік</ion-label>
+            <ion-input type="number"
+                       [(ngModel)]="pet.age"
+                       required
+                       name="age"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">Розмір</ion-label>
+            <ion-select [(ngModel)]="pet.size" name="size">
+                <ion-select-option *ngFor="let s of size" [value]="s.valueOf()">
+                    {{s}}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item *ngIf="pet.type === 'КІТ' || pet.type === 'ПЕС'">
+            <ion-label position="stacked">Довжина шерсті</ion-label>
+            <ion-select [(ngModel)]="pet.hairLength" name="hairLength">
+                <ion-select-option *ngFor="let h of hairLength" value="{{h}}">
+                    {{h}}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-input type="file" name="petPhoto" (change)="onPetPhotoUpload($event)"></ion-input>
+        <ion-img class="imagePreview" [src]="petPreview" alt="" *ngIf="petPreview"></ion-img>
+        <ion-button type="submit">Додати</ion-button>
+    </form>
+</ion-content>

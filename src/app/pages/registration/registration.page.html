@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Реєстрація</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #myForm="ngForm" (ngSubmit)="sendForm()" novalidate>
+    <ion-item>
+      <ion-label position="stacked"> Ім'я
+        <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input
+             #nameI="ngModel"
+             type="text"
+             name="name"
+             required
+             [(ngModel)]="user.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked"> Прізвище
+        <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input
+             #nameI="ngModel"
+             type="text"
+             name="surname"
+             required
+                 [(ngModel)]="user.surname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked"> Логін
+        <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input
+             #nameI="ngModel"
+             type="text"
+             name="username"
+             required
+             [(ngModel)]="user.username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked"> Пароль
+        <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input
+             type="password"
+             name="password"
+             required
+             [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked"> Е-Пошта
+        <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input matInput
+             type="email"
+             name="email"
+             required
+                 [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked"> Телефон
+      </ion-label>
+      <ion-input
+             type="text"
+             name="phoneNumber"
+             [(ngModel)]="user.phoneNumber"></ion-input>
+    </ion-item>
+    <ion-input   type="file" name="avatar" (change)="onPhotoUpload($event)"></ion-input>
+    <ion-button expand="block" [disabled] = "myForm.invalid" type="Submit">Sign Up</ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref=""></ion-back-button>
+        </ion-buttons>
+        <ion-title>Мої тваринки</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-button (click)="onClick()">Додати тваринку</ion-button>
+    <mat-expansion-panel *ngFor="let pe of this.userPets" (expandedChange)="getOnePet(pe.id)">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{pe.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{pe.type}} {{pe.age}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ion-img class="petImage flex" [src]="'http://localhost:8080/images/'+ pe.photo"></ion-img>
+        <h5 *ngIf="editable === true">
+            <ion-input [(ngModel)]="this.pet.name" placeholder="Ім'я" type="text"></ion-input>
+            <ion-input [(ngModel)]="this.pet.age" placeholder="Вік" type="text"></ion-input>
+            <ion-item>
+                <ion-label>Розмір</ion-label>
+                <ion-select [(ngModel)]="pet.size" name="size">
+                    <ion-select-option *ngFor="let s of size" [value]="s.valueOf()">
+                        {{s}}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item *ngIf="pet.type === 'КІТ' || pet.type === 'ПЕС'">
+                <ion-label>Довжина шерсті</ion-label>
+                <ion-select [(ngModel)]="pet.hairLength" name="hairLength">
+                    <ion-select-option *ngFor="let h of hairLength" value="{{h}}">
+                        {{h}}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+        </h5>
+        <div *ngIf="editable === true">
+            <ion-button (click)="updatePet()">Зберегти</ion-button>
+            <ion-button (click)="cancelEdit()">X</ion-button>
+        </div>
+        <div *ngIf="editable === false">
+            <p>Ім'я: {{pe.name}}</p>
+            <p>Вік: {{pe.age}}</p>
+            <p>Розмір: {{pe.size}}</p>
+            <p>Довжина шерсті: {{pe.hairLength}}</p>
+        </div>
+        <ion-button *ngIf="editable === false" (click)="editUser()">Редагувати</ion-button>
+    </mat-expansion-panel>
+</ion-content>
