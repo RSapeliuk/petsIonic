@@ -20,13 +20,7 @@
       <h3>Телефон: {{this.user.phoneNumber}}</h3>
     </div>
     <section ngSwitch="(editIndex == $index)">
-<!--      <star-rating [starType]="'svg'"-->
-<!--                   labelText="{{this.user.rating.toString() | slice: 0 : 3}} "-->
-<!--                   [rating]="this.user.rating"-->
-<!--                   [step]=".5"-->
-<!--                   [showHalfStars]="true"-->
-<!--                   [readOnly]="true">-->
-<!--      </star-rating>-->
+
       <!-- Edit Fields -->
       <h3 *ngIf="editable === true">
         <ion-input [(ngModel)]="this.user.name" placeholder="Ім'я" type="text"></ion-input>

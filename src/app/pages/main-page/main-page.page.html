@@ -13,7 +13,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngFor="let post of posts">
+  <ion-card *ngFor="let post of posts" (click)="onClick(post.id)">
       <div *ngIf="post.kind === 'Залишити'">
         <div *ngIf="post.photo; else blankPhoto">
           <ion-img [src]="'http://localhost:8080/images/'+ post.photo"></ion-img>

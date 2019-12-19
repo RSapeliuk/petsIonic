@@ -1,5 +1,7 @@
 {
   "name": "petsIonic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

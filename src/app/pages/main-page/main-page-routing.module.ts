@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 import {MainPagePage} from './main-page.page';
+import {PostDetailsPage} from './post-details/post-details.page';
 
 const routes: Routes = [
     {
@@ -22,8 +23,13 @@ const routes: Routes = [
     },
     {
         path: 'post',
-        loadChildren: () => import('../post/post.module').then( m => m.PostPageModule)
-    }];
+        loadChildren: () => import('../post/post.module').then(m => m.PostPageModule)
+    },
+    {
+        path: 'post-details',
+        loadChildren: () => import('./post-details/post-details.module').then(m => m.PostDetailsPageModule)
+    }
+];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

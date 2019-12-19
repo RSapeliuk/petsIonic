@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="dismiss()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title *ngIf="post">{{post.title}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="post">
+        <div>
+            <div>
+                <div *ngIf="post.kind === 'Залишити'">
+                    <div *ngIf="post.photo; else blankPhoto">
+                        <ion-img class="image" [src]="'http://localhost:8080/images/'+ post.photo"></ion-img>
+                    </div>
+                    <ng-template #blankPhoto>
+                        <ion-img class="image"
+                                 src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/2-interior-wall-with-blank-picture-frame-jon-boyes.jpg"
+                                 alt=""></ion-img>
+                    </ng-template>
+                </div>
+                <ion-item *ngIf="post.pet && post.kind === 'Віддати'">
+                    <ion-img class="image" [src]="'http://localhost:8080/images/'+ post.pet.photo"></ion-img>
+                </ion-item>
+            </div>
+            <div>
+                <ion-item>
+                    <p>Власник: {{this.post.user.name}} {{this.post.user.surname}}</p></ion-item>
+                    <ion-item><p class="text">E-Mail: {{this.post.user.email}}</p></ion-item>
+                    <ion-item><p class="text">Телефон: {{this.post.user.phoneNumber}}</p></ion-item>
+
+
+            </div>
+            <div>
+                <ion-item>
+                    <p> Тип поста: {{post.kind}}</p>
+                </ion-item>
+                <ion-item *ngIf="post.postDistrict">
+                    <p>Розташування: {{post.postDistrict.city.name}}, {{post.postDistrict.name}}</p>
+                </ion-item>
+                <ion-item>
+                    <p>Додаткова інформація:</p>
+                    <p>{{post.optionalField}}</p>
+                </ion-item>
+                <ion-item *ngIf="this.post.kind === 'Віддати'">
+                    <ion-item>
+                        <p> Від: {{post.date}} </p>
+                    </ion-item>
+                    <ion-item>
+                        <p> До: {{post.expirationDate}} </p>
+                    </ion-item>
+                </ion-item>
+            </div>
+            <!--    <div *ngIf="this.user">-->
+            <!--      <button mat-button *ngIf="this.post.user.id === this.user.id">Редагувати</button>-->
+            <!--    </div>-->
+        </div>
+    </div>
+</ion-content>

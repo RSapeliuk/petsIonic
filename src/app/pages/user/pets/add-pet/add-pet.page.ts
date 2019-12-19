@@ -6,6 +6,7 @@ import {AuthService} from '../../../../services/auth.service';
 import {UuidService} from '../../../../services/uuid.service';
 import {ImageUploadService} from '../../../../services/image-upload.service';
 import {Router} from '@angular/router';
+import {ModalController} from '@ionic/angular';
 
 @Component({
     selector: 'app-add-pet',
@@ -27,7 +28,8 @@ export class AddPetPage implements OnInit {
     constructor(public petService: PetService,
                 public router: Router,
                 public imageService: ImageUploadService,
-                public uuidService: UuidService) {
+                public uuidService: UuidService,
+                public modalCtrl: ModalController) {
     }
 
     ngOnInit() {
@@ -56,6 +58,13 @@ export class AddPetPage implements OnInit {
             this.petPreview = reader.result;
         };
         reader.readAsDataURL(image);
+    }
+    dismiss() {
+        // using the injected ModalController this page
+        // can "dismiss" itself and optionally pass back data
+        this.modalCtrl.dismiss({
+            dismissed: true
+        });
     }
 
 }

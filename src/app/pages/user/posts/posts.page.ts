@@ -6,6 +6,8 @@ import {ImageUploadService} from '../../../services/image-upload.service';
 import {User} from '../../../models/User';
 import {Post} from '../../../models/Post';
 import {Pet} from '../../../models/Pet';
+import {PostDetailsPage} from '../../main-page/post-details/post-details.page';
+import {ModalController} from '@ionic/angular';
 
 @Component({
   selector: 'app-posts',
@@ -18,7 +20,8 @@ export class PostsPage implements OnInit {
   userPets: Pet[];
   constructor(public authUser: AuthService,
               public postService: PostService,
-              public petService: PetService) { }
+              public petService: PetService,
+              public modalController: ModalController) { }
 
   ngOnInit() {
     this.authUser.getUser().subscribe(value => {
@@ -33,4 +36,13 @@ export class PostsPage implements OnInit {
     }, 1000);
   }
 
+  async onClick(postId) {
+    const modal = await this.modalController.create({
+      component: PostDetailsPage,
+      componentProps: {
+        id: postId,
+      }
+    });
+    return await modal.present();
+  }
 }

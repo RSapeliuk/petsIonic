@@ -10,7 +10,7 @@
 <ion-content>
   <div *ngIf="this.userPosts" class="cards">
     <div *ngFor="let post of this.userPosts">
-      <ion-card class="mat-card" *ngIf="post.enabled">
+      <ion-card class="mat-card" *ngIf="post.enabled" (click)="onClick(post.id)">
 
         <div *ngIf="post.kind === 'Залишити'">
           <div *ngIf="post.photo; else blankPhoto">
