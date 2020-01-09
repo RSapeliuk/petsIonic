@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../../../models/User';
 import {Pet} from '../../../../models/Pet';
 import {PetService} from '../../../../services/pet.service';
-import {AuthService} from '../../../../services/auth.service';
 import {UuidService} from '../../../../services/uuid.service';
 import {ImageUploadService} from '../../../../services/image-upload.service';
 import {Router} from '@angular/router';

@@ -10,7 +10,7 @@
 <ion-content>
   <div *ngIf="this.user">
 
-    <div *ngIf="user.avatar != null; else photo"><ion-img src="http://localhost:8080/images/{{this.user.avatar}}"
+    <div *ngIf="user.avatar != null; else photo"><ion-img [src]="this.authUser.apiService.apiUrl + '/images/' + this.user.avatar"
                                                           class="avatar" alt="userPhoto"></ion-img></div>
     <ng-template #photo><ion-img src="http://storage.proboards.com/6747819/images/kIDnzzBGZLVoizBNhvQs.png" alt=""></ion-img>
     </ng-template>

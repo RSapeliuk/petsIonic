@@ -3,7 +3,7 @@
         <ion-toolbar color="primary">
             <div *ngIf="user">
                 <ion-avatar>
-                    <img [src]="'http://localhost:8080/images/'+ user.avatar">
+                    <img [src]="this.authService.apiService.apiUrl + '/images/'+ user.avatar">
                 </ion-avatar>
                 <ion-title>{{user.name}} {{user.surname}}</ion-title>
             </div>

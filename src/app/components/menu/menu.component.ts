@@ -16,15 +16,15 @@ export class MenuComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if(!this.user) {
+        if (!this.user) {
             this.authService.getUser().subscribe(value => this.user = value);
         }
     }
+
     logout() {
         this.authService.logout();
         window.location.reload();
     }
-
 
 
 }

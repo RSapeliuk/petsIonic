@@ -16,7 +16,7 @@
   <ion-card *ngFor="let post of posts" (click)="onClick(post.id)">
       <div *ngIf="post.kind === 'Залишити'">
         <div *ngIf="post.photo; else blankPhoto">
-          <ion-img [src]="'http://localhost:8080/images/'+ post.photo"></ion-img>
+          <ion-img [src]="this.postService.apiService.apiUrl + '/images/'+ post.photo"></ion-img>
         </div>
         <ng-template #blankPhoto>
           <ion-img
@@ -24,7 +24,7 @@
                alt=""></ion-img></ng-template>
       </div>
       <div *ngIf="post.pet && post.kind === 'Віддати'">
-        <ion-img class="postImage" [src]="'http://localhost:8080/images/'+ post.pet.photo"></ion-img>
+        <ion-img class="postImage" [src]="this.postService.apiService.apiUrl + '/images/'+ post.pet.photo"></ion-img>
       </div>
     <ion-card-header>
       <ion-card-subtitle>{{post.user.name}} {{post.user.surname}}</ion-card-subtitle>

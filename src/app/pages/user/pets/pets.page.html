@@ -18,7 +18,7 @@
                 {{pe.type}} {{pe.age}}
             </mat-panel-description>
         </mat-expansion-panel-header>
-        <ion-img class="petImage flex" [src]="'http://localhost:8080/images/'+ pe.photo"></ion-img>
+        <ion-img class="petImage flex" [src]="this.authUser.apiService.apiUrl + '/images/'+ pe.photo"></ion-img>
         <h5 *ngIf="editable === true">
             <ion-input [(ngModel)]="this.pet.name" placeholder="Ім'я" type="text"></ion-input>
             <ion-input [(ngModel)]="this.pet.age" placeholder="Вік" type="text"></ion-input>
